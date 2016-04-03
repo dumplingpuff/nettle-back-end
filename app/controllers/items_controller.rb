@@ -7,6 +7,10 @@ def index
   render json: Item.all
 end
 
+def show
+  render json: @item
+end
+
 def create
   @item = Item.new(item_params)
 
@@ -16,6 +20,16 @@ def create
     render json: @item.errors, status: :unprocessable_entity
   end
 end
+
+def update
+  if @item.update(item_params)
+    render json: @item, status: :ok
+  else
+    render json: @item.errors, status: :unprocessable_entity
+  end
+end
+
+
 
 private
 
