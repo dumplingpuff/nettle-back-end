@@ -1,2 +1,2 @@
-curl --include --request DELETE http://localhost:3000/trips/1 \
-  --header "Authorization: Token token=BAhJIiViNDMwZDk4NzU5MjA2ZGFjMzA0ZGU0OGUyMWYwYmIyMwY6BkVG--610dfe621fe003aefc7b48f687b7e0f244dc68e6"
+curl --include --request DELETE http://localhost:3000/items/1 \
+  --header "Authorization: Token token=BAhJIiVlN2UyMGJjMTQ0NGY5Y2ExNDY4Y2U0NzEyOTQ4MGExNgY6BkVG--2aaa68131f1b2d2c7db3ec3dd54d4d11deed9819"
