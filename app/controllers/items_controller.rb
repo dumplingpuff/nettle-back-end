@@ -29,10 +29,13 @@ def update
   end
 end
 
+def destroy
+  @item.destroy
+  head :no_content
+end
 
 
 private
-
 def find_item
   @item = Item.find(params[:id])
 end
