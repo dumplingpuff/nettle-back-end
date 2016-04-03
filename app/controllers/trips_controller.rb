@@ -1,6 +1,7 @@
 class TripsController < ProtectedController
   before_filter :find_trip, only: [:show, :update, :destroy]
-  skip_before_action :authenticate, only: [:index, :show]
+  before_filter :trip_params, only: [:create, :update]
+  skip_before_action :authenticate, only: [:index, :show, :patch]
 
   def index
     render json: Trip.all
@@ -29,7 +30,7 @@ class TripsController < ProtectedController
   end
 
   def destroy
-    @article.destroy
+    @trip.destroy
     head :no_content
   end
 
@@ -39,6 +40,6 @@ class TripsController < ProtectedController
   end
 
   def trip_params
-    params.require(:trip).permit(:title, :location, :arrival, :departure, :description)
+    params.require(:trip).permit!
   end
 end
