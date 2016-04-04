@@ -24,7 +24,7 @@ class TripsController < ProtectedController
     end
   end
 
-  def add_user
+  def adduser
     @trip = Trip.find(params[:trip_id])
     @user = User.find(params[:user_id])
     @user.trips = @trip
