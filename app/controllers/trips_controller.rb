@@ -14,7 +14,6 @@ class TripsController < ProtectedController
   def create
     @trip = Trip.new(trip_params)
     @user = current_user
-    # @trip.users.new()
     @user.trips.new(trip_params)
 
     if @trip.save && @user.save
