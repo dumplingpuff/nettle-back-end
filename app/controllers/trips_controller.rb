@@ -1,4 +1,4 @@
-class TripsController < ProtectedController
+class TripsController < OpenReadController
   before_filter :find_trip, only: [:show, :update, :destroy]
   before_filter :trip_params, only: [:create, :update]
   skip_before_action :authenticate, only: [:index, :show, :patch]

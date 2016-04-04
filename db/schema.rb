@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160403201950) do
+ActiveRecord::Schema.define(version: 20160404205033) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,7 +39,10 @@ ActiveRecord::Schema.define(version: 20160403201950) do
     t.string   "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "trip_id"
   end
+
+  add_index "items", ["trip_id"], name: "index_items_on_trip_id", using: :btree
 
   create_table "trips", force: :cascade do |t|
     t.string   "title",       null: false
@@ -65,4 +68,5 @@ ActiveRecord::Schema.define(version: 20160403201950) do
   add_foreign_key "examples", "users"
   add_foreign_key "invites", "trips"
   add_foreign_key "invites", "users"
+  add_foreign_key "items", "trips"
 end
