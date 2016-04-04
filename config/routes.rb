@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   post '/sign-in' => 'users#signin'
   delete '/sign-out/:id' => 'users#signout'
   patch '/change-password/:id' => 'users#changepw'
+  patch '/trip/:trip_id/user/:user_id' => 'trips#adduser'
   resources :users, only: [:index, :show]
   resources :trips
+  resources :items
 end

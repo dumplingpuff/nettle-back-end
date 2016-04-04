@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160402225022) do
+ActiveRecord::Schema.define(version: 20160404230616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,11 +25,26 @@ ActiveRecord::Schema.define(version: 20160402225022) do
 
   add_index "examples", ["user_id"], name: "index_examples_on_user_id", using: :btree
 
+  create_table "invites", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "trip_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "invites", ["trip_id"], name: "index_invites_on_trip_id", using: :btree
+  add_index "invites", ["user_id"], name: "index_invites_on_user_id", using: :btree
+
   create_table "items", force: :cascade do |t|
     t.string   "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "trip_id"
+    t.integer  "user_id"
   end
+
+  add_index "items", ["trip_id"], name: "index_items_on_trip_id", using: :btree
+  add_index "items", ["user_id"], name: "index_items_on_user_id", using: :btree
 
   create_table "trips", force: :cascade do |t|
     t.string   "title",       null: false
@@ -53,4 +68,8 @@ ActiveRecord::Schema.define(version: 20160402225022) do
   add_index "users", ["token"], name: "index_users_on_token", unique: true, using: :btree
 
   add_foreign_key "examples", "users"
+  add_foreign_key "invites", "trips"
+  add_foreign_key "invites", "users"
+  add_foreign_key "items", "trips"
+  add_foreign_key "items", "users"
 end
