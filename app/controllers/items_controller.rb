@@ -13,7 +13,7 @@ end
 
 def create
   @item = Item.new(item_params)
-
+  # @item.trip.new()
   if @item.save
     render json: @item, status: :created
   else
