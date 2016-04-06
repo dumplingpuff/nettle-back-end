@@ -1,10 +1,15 @@
-class TripsController < OpenReadController
+class TripsController < ProtectedController
   before_filter :find_trip, only: [:show, :update, :destroy]
   before_filter :trip_params, only: [:create, :update]
-  skip_before_action :authenticate, only: [:index, :show]
+  skip_before_action :authenticate, only: [:show]
 
   def index
-    render json: Trip.all
+    # @user = current_user
+    # render json: Trip.all
+    # Trip.find_by user_id: current_user.id
+    # Trip.joins(:users).where(:users => { :id => @user['id'] })
+    @trips = current_user.trips
+    render json: @trips
   end
 
   def show
@@ -16,7 +21,8 @@ class TripsController < OpenReadController
     @user = current_user
     @user.trips.new(trip_params)
 
-    if @trip.save && @user.save
+    if @user.save
+      p current_user.trips
       render json: @trip, status: :created
     else
       render json: @trip.errors, status: :unprocessable_entity
@@ -39,6 +45,8 @@ class TripsController < OpenReadController
   end
 
   def destroy
+    @invite = Invite.find_by trip_id: params[:id]
+    @invite.destroy
     @trip.destroy
     head :no_content
   end

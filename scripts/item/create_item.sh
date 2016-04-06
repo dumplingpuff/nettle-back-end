@@ -1,8 +1,8 @@
 curl --include --request POST http://localhost:3000/items \
-  --header "Authorization: Token token=BAhJIiVmODQyNzZkN2QzNDM4ZDNlYWZiMDNiMTRjZjA2ZTQyYQY6BkVG--ac309c63c8773d2041b2056eb2d3691768720ba7" \
+  --header "Authorization: Token token=BAhJIiU3NGU1ZTcxZTZkOGQ3ZTUzZGUwYTZlNjJhNGM2YzQwOAY6BkVG--0bb5ec535408e7fa77f4f5c1dbdb2bd83540b532" \
   --header "Content-Type: application/json" \
   --data '{
       "item": {
-        "content": "Pack your boxers."
+        "content": "Pull your pants up."
       }
   }'

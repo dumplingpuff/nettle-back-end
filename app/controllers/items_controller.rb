@@ -1,6 +1,7 @@
-class ItemsController < ApplicationController
+class ItemsController < ProtectedController
 before_filter :find_item, only: [:show, :update, :destroy]
 before_filter :item_params, only: [:create, :update]
+# before_filter :get_user, only: [:create, :update]
 skip_before_action :authenticate, only: [:index, :show]
 
 def index
@@ -13,8 +14,9 @@ end
 
 def create
   @item = Item.new(item_params)
-  # @item.trip.new()
-  if @item.save
+  @user = current_user
+  @user.items.new(item_params)
+  if @user.save
     render json: @item, status: :created
   else
     render json: @item.errors, status: :unprocessable_entity
@@ -42,6 +44,10 @@ end
 
 def item_params
   params.require(:item).permit!
+end
+
+def get_user
+  @user = User.find_by token: request.headers["HTTP_AUTHORIZATION"].split('=')[-1]
 end
 
 end
