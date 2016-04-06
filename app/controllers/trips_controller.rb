@@ -6,6 +6,7 @@ class TripsController < ProtectedController
   def index
     # @user = current_user
     render json: Trip.all
+    # Trip.find_by user_id: current_user.id
     # Trip.joins(:users).where(:users => { :id => @user['id'] })
   end
 
@@ -41,6 +42,8 @@ class TripsController < ProtectedController
   end
 
   def destroy
+    @invite = Invite.find_by trip_id: params[:id]
+    @invite.destroy
     @trip.destroy
     head :no_content
   end
