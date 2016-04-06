@@ -1,13 +1,15 @@
 class TripsController < ProtectedController
   before_filter :find_trip, only: [:show, :update, :destroy]
   before_filter :trip_params, only: [:create, :update]
-  skip_before_action :authenticate, only: [:index, :show]
+  skip_before_action :authenticate, only: [:show]
 
   def index
     # @user = current_user
-    render json: Trip.all
+    # render json: Trip.all
     # Trip.find_by user_id: current_user.id
     # Trip.joins(:users).where(:users => { :id => @user['id'] })
+    @trips = current_user.trips
+    render json: @trips
   end
 
   def show
@@ -20,6 +22,7 @@ class TripsController < ProtectedController
     @user.trips.new(trip_params)
 
     if @user.save
+      p current_user.trips
       render json: @trip, status: :created
     else
       render json: @trip.errors, status: :unprocessable_entity
