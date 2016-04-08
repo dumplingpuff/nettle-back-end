@@ -16,7 +16,9 @@ def create
   @item = Item.new(item_params)
   @user = current_user
   @user.items.new(item_params)
-  if @user.save
+  @trip = Trip.find(params[:tripId])
+  @trip.items << @item
+  if @user.save && @trip.save
     render json: @item, status: :created
   else
     render json: @item.errors, status: :unprocessable_entity
