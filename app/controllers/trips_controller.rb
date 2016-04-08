@@ -4,10 +4,7 @@ class TripsController < ProtectedController
   skip_before_action :authenticate, only: [:show]
 
   def index
-    # @user = current_user
     # render json: Trip.all
-    # Trip.find_by user_id: current_user.id
-    # Trip.joins(:users).where(:users => { :id => @user['id'] })
     @trips = current_user.trips
     render json: @trips
   end
