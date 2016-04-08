@@ -1,9 +1,9 @@
 
-curl --include --request PATCH http://localhost:3000/trips/1 \
-  --header "Authorization: Token token=BAhJIiViNDMwZDk4NzU5MjA2ZGFjMzA0ZGU0OGUyMWYwYmIyMwY6BkVG--610dfe621fe003aefc7b48f687b7e0f244dc68e6" \
+curl --include --request PUT http://localhost:3000/trips/3 \
+  --header "Authorization: Token token=BAhJIiUxNWVmYmExZWJlZDgxMWI2ZTc2NWQyMDExODllNTc5YQY6BkVG--bdca854ebdd624d9d8d691880cca6e68f794a1b0" \
   --header "Content-Type: application/json" \
   --data '{
     "trip": {
-      "title": "ShitBag"
+      "title": "Put Request"
     }
   }'
