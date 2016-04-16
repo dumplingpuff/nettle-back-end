@@ -1,9 +1,9 @@
 curl --include --request POST http://localhost:3000/trips \
-  --header "Authorization: Token token=BAhJIiU0YzczZjYwZmYyZjIxNWU2MGEwMWEwNmRiMzVhNTMxOAY6BkVG--002f52b1c41ab0f82a6dc6a5adbf1f8e78f50ff4" \
+  --header "Authorization: Token token=BAhJIiU4YjkzNTFiYmI0ZDJhYzA1YThjZTE4N2JhZjMxNzllOAY6BkVG--d3b28dc3c43343556ab0851c82da9940693f7bec" \
   --header "Content-Type: application/json" \
   --data '{
       "trip": {
-        "title": "Boob bomb",
+        "title": "Bro Yo",
         "location": "New Vermont"
       }
   }'
