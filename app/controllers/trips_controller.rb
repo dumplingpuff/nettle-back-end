@@ -16,10 +16,10 @@ class TripsController < ProtectedController
   def create
     @trip = Trip.new(trip_params)
     @user = current_user
-    @user.trips.new(trip_params)
+    # @user.trips.new(trip_params)
 
-    if @user.save
-      p current_user.trips
+    if @trip.save
+      @user.trips << @trip
       render json: @trip, status: :created
     else
       render json: @trip.errors, status: :unprocessable_entity

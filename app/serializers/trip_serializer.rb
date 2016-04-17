@@ -1,5 +1,5 @@
 class TripSerializer < ActiveModel::Serializer
-  attributes :id, :title, :location, :arrival, :departure, :description, :items
+  attributes :id, :title, :location, :arrival, :departure, :description, :items, :users
   # has_many :users, embed: :ids, key: "users", include: true
   # def items
   #   object.items.pluck(:content)
