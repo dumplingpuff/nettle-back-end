@@ -16,7 +16,11 @@ def create
   @item = Item.new(item_params)
   @user = current_user
   @user.items.new(item_params)
-  @trip = Trip.find(params[:tripId])
+  p "I AM HERE"
+  p params
+  p "Finding Trip Id"
+  p params['item']['trip_id']
+  @trip = Trip.find(params['item']['trip_id'])
   @trip.items << @item
   if @user.save && @trip.save
     render json: @item, status: :created
