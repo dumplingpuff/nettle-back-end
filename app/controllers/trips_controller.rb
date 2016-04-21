@@ -1,6 +1,6 @@
 class TripsController < ProtectedController
-  before_filter :find_trip, only: [:show, :update, :destroy]
-  before_filter :trip_params, only: [:create, :update]
+  before_filter :find_trip, only: [:show, :adduser, :update, :destroy]
+  before_filter :trip_params, only: [:create, :adduser, :update]
   skip_before_action :authenticate, only: [:show]
 
   def index
@@ -16,7 +16,6 @@ class TripsController < ProtectedController
   def create
     @trip = Trip.new(trip_params)
     @user = current_user
-    # @user.trips.new(trip_params)
 
     if @trip.save
       @user.trips << @trip
@@ -27,10 +26,14 @@ class TripsController < ProtectedController
   end
 
   def adduser
-    @trip = Trip.find(params[:trip_id])
-    @user = User.find(params[:user_id])
-    @user.trips = @trip
-    @trip.users = @user
+    p "I am in "
+    p params
+    @user = User.find(params[:trip][:users][:id])
+    if @trip.users << @user
+      render json: @trip, status: :created
+    else
+      render json: @trip.errors, status: :unprocessable_entity
+    end
   end
 
   def update
