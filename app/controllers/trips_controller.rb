@@ -14,8 +14,10 @@ class TripsController < ProtectedController
   end
 
   def create
+    # params[:arrival] = Date.strptime(params[:arrival], '%m/%d/%Y')
     @trip = Trip.new(trip_params)
     @user = current_user
+
 
     if @trip.save
       @user.trips << @trip
@@ -26,8 +28,6 @@ class TripsController < ProtectedController
   end
 
   def adduser
-    p "I am in "
-    p params
     @user = User.find(params[:trip][:users][:id])
     if @trip.users << @user
       render json: @trip, status: :created
@@ -45,9 +45,13 @@ class TripsController < ProtectedController
   end
 
   def destroy
-    @invite = Invite.find_by trip_id: params[:id]
-    @invite.destroy
-    @trip.destroy
+    @user = current_user
+    @user.trips.delete(params[:id])
+    @user.reload
+    # @invite = Invite.find_by trip_id: params[:id]
+    # @invite.delete
+    # @trip.delete
+
     head :no_content
   end
 
