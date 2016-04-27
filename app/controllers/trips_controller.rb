@@ -38,10 +38,6 @@ class TripsController < ProtectedController
   end
 
   def update
-    p "I'm in"
-    p @trip
-    p @trip[:users]
-    p "I'm out"
     if @trip.update(trip_update)
       render json: @trip, status: :ok
     else
