@@ -1,6 +1,7 @@
 class TripsController < ProtectedController
   before_filter :find_trip, only: [:show, :adduser, :update, :destroy]
-  before_filter :trip_params, only: [:create, :adduser, :update]
+  before_filter :trip_params, only: [:create, :adduser]
+  before_filter :trip_update, only: [:update]
   skip_before_action :authenticate, only: [:show]
 
   def index
@@ -37,7 +38,7 @@ class TripsController < ProtectedController
   end
 
   def update
-    if @trip.update(trip_params)
+    if @trip.update(trip_update)
       render json: @trip, status: :ok
     else
       render json: @trip.errors, status: :unprocessable_entity
@@ -62,6 +63,10 @@ class TripsController < ProtectedController
 
   def trip_params
     params.require(:trip).permit!
+  end
+
+  def trip_update
+    params.require(:trip).permit(:id, :title, :location, :arrival, :departure, :description)
   end
 
   def get_user
